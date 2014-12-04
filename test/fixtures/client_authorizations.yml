@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  prime: MyString
+  last_name: MyString
+  first_name: MyString
+  birth_date: 2014-12-04
+  case_manager: MyString
+  case_manager_phone: MyString
+  branch: MyString
+  current_authorized: 1
+  current_date_begins: 2014-12-04
+  current_date_ends: 2014-12-04
+  current_date_entered: 2014-12-04
+  current_action: MyString
+
+two:
+  prime: MyString
+  last_name: MyString
+  first_name: MyString
+  birth_date: 2014-12-04
+  case_manager: MyString
+  case_manager_phone: MyString
+  branch: MyString
+  current_authorized: 1
+  current_date_begins: 2014-12-04
+  current_date_ends: 2014-12-04
+  current_date_entered: 2014-12-04
+  current_action: MyString

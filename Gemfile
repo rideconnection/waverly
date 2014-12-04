@@ -32,8 +32,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bootstrap-sass', '~> 3.3.1.0'
 gem 'autoprefixer-rails'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'devise', '~> 3.4.1'
+gem 'cancancan', '~> 1.9.2'
 
 group :development do
   gem 'spring'
