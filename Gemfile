@@ -28,6 +28,7 @@ gem 'turbolinks'
 # Use Twitter Bootstrap framework
 gem 'bootstrap-sass', '~> 3.3.1.0'
 gem 'autoprefixer-rails'
+gem 'bootstrap_form', '~> 2.2.0'
 
 # Authentication and authorization
 gem 'devise', '~> 3.4.1'

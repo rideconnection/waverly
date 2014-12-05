@@ -1,0 +1,9 @@
+<h1>Upload Trip File</h1>
+
+<%= bootstrap_form_for(@upload, multipart: true) do |f| %>
+  <%= f.alert_message "Please fix the errors below." %>
+  <%= f.file_field :file, class: "required", label: "Select a CSV file to upload:" %>
+  <br>
+  <%= f.submit "Upload", class: "btn btn-primary btn-lg" %>
+  <%= link_to "Cancel", uploads_path, class: "btn btn-lg" %>
+<% end %>

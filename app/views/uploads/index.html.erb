@@ -1,0 +1,27 @@
+<% cache(cache_key_for_uploads) do %>
+  <h1>Uploaded Trip Files</h1>
+
+  <p>
+    <%= link_to "New Upload", new_upload_path, class: "btn btn-primary btn-lg", role: "button" %>
+  </p>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <th>Uploaded At</th>
+        <th># of Trips</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @uploads.each do |upload| %>
+          <% cache(upload) do %>
+            <tr>
+              <td><%= upload.uploaded_at.to_s(:long) %></td>
+              <td><%= upload.uploaded_trips.count %></td>
+              <td><%= link_to "View trips", upload %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
