@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  should have_many(:read_client_authorizations).class_name('ClientAuthorization').with_foreign_key(:reader_id).dependent(:nullify)
+  should have_many(:read_client_authorizations).class_name('ClientAuthorization').with_foreign_key(:reader_id).inverse_of(:reader).dependent(:nullify)
   
   # Character requirements not met
   should_not allow_value("aaaaaaaa").for(:password)

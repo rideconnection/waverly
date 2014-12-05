@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  has_many :read_client_authorizations, class_name: 'ClientAuthorization', foreign_key: :reader_id, dependent: :nullify
+  has_many :read_client_authorizations, class_name: 'ClientAuthorization', foreign_key: :reader_id, inverse_of: :reader, dependent: :nullify
   
   validate do |user|
     # minimum 8 characters with at least one of each of the following: lower case alpha, upper case alpha, number, and non-alpha-numerical
@@ -23,8 +23,6 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   
   # before_validation :generate_a_password, :on => :create
-  
-  default_scope { order(name: :asc) }
   
   # Temporary attribute for auto-generated password tokens
   # attr_accessor :must_generate_password
