@@ -11,13 +11,10 @@ module Waverly
     config.time_zone = 'Pacific Time (US & Canada)'
 
     config.generators do |g|
-      # Generate MiniTest tests (not specs) by default
-      # g.test_framework :minitest, spec: true, fixture: true
-      
       # Mute rails generators
-      # g.helper false
-      # g.assets false
-      # g.view_specs false
+      g.helper false
+      g.assets false
+      g.view_specs false
     end
   end
 end
