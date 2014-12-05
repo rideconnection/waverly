@@ -22,28 +22,42 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+# Turbolinks makes following links in your web application faster
 gem 'turbolinks'
-
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Use Twitter Bootstrap framework
 gem 'bootstrap-sass', '~> 3.3.1.0'
 gem 'autoprefixer-rails'
 
+# Authentication and authorization
 gem 'devise', '~> 3.4.1'
 gem 'cancancan', '~> 1.9.2'
 
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', '~> 0.4.0'
+end
+
+group :development, :test do
+  # Debugging for Ruby 2
+  gem 'byebug'
+
+  # Rails application preloader
+  gem 'spring'  
+end
+
 group :development do
-  gem 'spring'
-  gem 'byebug'  
+  # Generate layout files for various front-end frameworks (i.e. Bootstrap)
   gem 'rails_layout'
+end
+
+group :test do
+  # Shoulda matchers and contexts for Test::Unit
+  gem 'shoulda', '~> 3.5.0'
+  
+  # Adds Capybara feature tests in Minitest and Rails
+  # gem 'minitest-rails-capybara', '~> 2.1.1'
 end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-

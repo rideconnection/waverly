@@ -1,7 +1,5 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  should have_many(:read_client_authorizations).class_name('ClientAuthorization').with_foreign_key(:reader_id).dependent(:nullify)
 end

@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  has_many :read_uploads, class_name: 'Upload', foreign_key: :reader_id
+  has_many :read_client_authorizations, class_name: 'ClientAuthorization', foreign_key: :reader_id, dependent: :nullify
   
   validate do |user|
     # minimum 8 characters with at least one of each of the following: lower case alpha, upper case alpha, number, and non-alpha-numerical
@@ -22,37 +22,37 @@ class User < ActiveRecord::Base
   
   validates_presence_of :name
   
-  before_validation :generate_a_password, :on => :create
+  # before_validation :generate_a_password, :on => :create
   
   default_scope { order(name: :asc) }
   
   # Temporary attribute for auto-generated password tokens
-  attr_accessor :must_generate_password
+  # attr_accessor :must_generate_password
   
-  def need_to_generate_password?
-    !!must_generate_password
-  end
+  # def need_to_generate_password?
+  #   !!must_generate_password
+  # end
 
-  def display_name
-    if name.blank?
-      email
-    else
-      name
-    end
-  end
+  # def display_name
+  #   if name.blank?
+  #     email
+  #   else
+  #     name
+  #   end
+  # end
 
   private
 
-  def generate_a_password
-    if need_to_generate_password?
-      temp_token = (Devise.friendly_token.first(16) +
-        Array("a".."z").shuffle.first +
-        Array("A".."Z").shuffle.first +
-        Array("0".."9").shuffle.first +
-        "!@\#$%^&*".split("").shuffle.first).split("").shuffle.join("")
-      self.password = self.password_confirmation = temp_token
-      self.reset_password_token = User.reset_password_token
-      self.reset_password_sent_at = Time.zone.now
-    end
-  end
+  # def generate_a_password
+  #   if need_to_generate_password?
+  #     temp_token = (Devise.friendly_token.first(16) +
+  #       Array("a".."z").shuffle.first +
+  #       Array("A".."Z").shuffle.first +
+  #       Array("0".."9").shuffle.first +
+  #       "!@\#$%^&*".split("").shuffle.first).split("").shuffle.join("")
+  #     self.password = self.password_confirmation = temp_token
+  #     self.reset_password_token = User.reset_password_token
+  #     self.reset_password_sent_at = Time.zone.now
+  #   end
+  # end
 end
