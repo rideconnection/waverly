@@ -1,7 +1,12 @@
 require 'test_helper'
 
 class UploadTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  should have_many(:uploaded_trips)
+  
+  should "set the uploaded_at on create" do
+    upload = Upload.new
+    assert upload.uploaded_at.blank?
+    assert upload.save
+    assert upload.uploaded_at.present?
+  end
 end
