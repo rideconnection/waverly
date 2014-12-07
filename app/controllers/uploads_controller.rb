@@ -1,6 +1,7 @@
 class UploadsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource only: :create
 
   respond_to :html
 
@@ -13,6 +14,7 @@ class UploadsController < ApplicationController
   def new; end
 
   def create
+    @upload = Upload.new
     uploaded_file = params[:upload][:file]
     if uploaded_file.present? && uploaded_file.size > 0
       @upload.built_uploaded_trips_from_file(uploaded_file)
