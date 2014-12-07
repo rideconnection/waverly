@@ -34,6 +34,10 @@ gem 'bootstrap_form', '~> 2.2.0'
 gem 'devise', '~> 3.4.1'
 gem 'cancancan', '~> 1.9.2'
 
+# Pagination
+gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap', '~> 1.0.1'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', '~> 0.4.0'

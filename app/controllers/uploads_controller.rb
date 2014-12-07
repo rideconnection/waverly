@@ -2,7 +2,7 @@ class UploadsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @uploads = Upload.order(uploaded_at: :desc)
+    @uploads = Upload.order(uploaded_at: :desc).page(params[:page])
   end
   
   def show
