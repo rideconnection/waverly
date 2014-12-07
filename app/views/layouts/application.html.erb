@@ -13,8 +13,23 @@
       <%= render 'layouts/navigation' %>
     </header>
     <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
+      <div id="session-timeout-warning" class="panel panel-default" style="display: none;">
+        <div class="panel-body">
+          You will be logged off in <span><!-- countdown place holder
+           --></span>&nbsp;seconds due to inactivity. 
+          <a id="session-resume" href="#">Click here to stay logged in.</a>
+        </div>
+      </div>      
+      <%= render 'layouts/messages' %>
+      <%= yield %>
     </main>
+    <% if current_user %>
+      <%= javascript_tag do %>
+        $(document).ready(function(){
+          idleTimer = new IdleTimer();
+          idleTimer.start();
+        });
+      <% end %>
+    <% end %>
   </body>
 </html>

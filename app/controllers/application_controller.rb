@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
+  private 
+  
   def ssl_enabled?
     Rails.env.staging? || Rails.env.production?
   end
