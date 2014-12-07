@@ -1,0 +1,23 @@
+<% cache(@user) do %>
+  <h1><%= @user.name %></h1>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+
+  <p>
+    <strong>Administrator:</strong>
+    <%= @user.administrator? ? "Yes" : "No" %>
+  </p>
+
+  <p>
+    <strong>Last login:</strong>
+    <%= @user.last_sign_in_at.try(:to_s, :long) %>
+  </p>
+<% end %>

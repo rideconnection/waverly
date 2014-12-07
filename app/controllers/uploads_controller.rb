@@ -1,21 +1,19 @@
 class UploadsController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource
+
+  respond_to :html
 
   def index
-    @uploads = Upload.order(uploaded_at: :desc).page(params[:page])
+    @uploads = @uploads.order(uploaded_at: :desc).page(params[:page])
   end
   
-  def show
-    @upload = Upload.find(params[:id])
-  end
+  def show; end
 
-  def new
-    @upload = Upload.new
-  end
+  def new; end
 
   def create
     uploaded_file = params[:upload][:file]
-    @upload = Upload.new
     if uploaded_file.present? && uploaded_file.size > 0
       @upload.built_uploaded_trips_from_file(uploaded_file)
     else

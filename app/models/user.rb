@@ -21,36 +21,4 @@ class User < ActiveRecord::Base
   end
   
   validates_presence_of :name
-  
-  # before_validation :generate_a_password, :on => :create
-  
-  # Temporary attribute for auto-generated password tokens
-  # attr_accessor :must_generate_password
-  
-  # def need_to_generate_password?
-  #   !!must_generate_password
-  # end
-
-  # def display_name
-  #   if name.blank?
-  #     email
-  #   else
-  #     name
-  #   end
-  # end
-
-  private
-
-  # def generate_a_password
-  #   if need_to_generate_password?
-  #     temp_token = (Devise.friendly_token.first(16) +
-  #       Array("a".."z").shuffle.first +
-  #       Array("A".."Z").shuffle.first +
-  #       Array("0".."9").shuffle.first +
-  #       "!@\#$%^&*".split("").shuffle.first).split("").shuffle.join("")
-  #     self.password = self.password_confirmation = temp_token
-  #     self.reset_password_token = User.reset_password_token
-  #     self.reset_password_sent_at = Time.zone.now
-  #   end
-  # end
 end
