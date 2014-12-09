@@ -8,6 +8,11 @@ Bundler.require(*Rails.groups)
 
 module Waverly
   class Application < Rails::Application
+    # For Grape API
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+
+    # Use Ride Connection TZ by default
     config.time_zone = 'Pacific Time (US & Canada)'
 
     config.generators do |g|

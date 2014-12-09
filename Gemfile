@@ -40,6 +40,9 @@ gem 'cancancan', '~> 1.9.2'
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap', '~> 1.0.1'
 
+# API
+gem 'grape', '~> 0.9.0'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', '~> 0.4.0'
