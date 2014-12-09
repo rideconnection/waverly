@@ -16,8 +16,10 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
+group :staging, :production do
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  gem 'therubyracer', platforms: :ruby
+end
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -55,17 +57,12 @@ group :development do
   # Generate layout files for various front-end frameworks (i.e. Bootstrap)
   gem 'rails_layout'
 
-  # Deployment
+  # Use Capistrano for deployment
   gem 'capistrano', '~> 3.3'
   gem 'capistrano-rvm', '~> 0.1.2', require: false
   gem 'capistrano-rails', '~> 1.1', require: false
   gem 'capistrano-passenger', '~> 0.0.1', require: false
 end
-
-
-group :development do
-end
-
 
 group :test do
   # Shoulda matchers and contexts for Test::Unit
@@ -74,6 +71,3 @@ group :test do
   # Adds Capybara feature tests in Minitest and Rails
   # gem 'minitest-rails-capybara', '~> 2.1.1'
 end
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
