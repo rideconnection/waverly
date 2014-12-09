@@ -11,11 +11,8 @@ set :rvm_type, :user
 set :rvm_ruby_version, '2.1.4@waverly'
 set :rvm_roles, [:app, :web]
 
-# Postgres options
-set :pg_user, "waverly"
-
 # Rails options
-set :conditionally_migrate, true
+set :conditionally_migrate, false
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -48,12 +45,5 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 set :keep_releases, 20
 
 namespace :deploy do
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
+  after :migrate, :seed
 end
