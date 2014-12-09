@@ -5,11 +5,10 @@ set :application, 'waverly'
 set :repo_url, 'git://github.com/rideconnection/waverly.git'
 set :deploy_via, :remote_cache
 set :deploy_to, '/home/deployer/rails/waverly'
-set :pty, true
 
 # RVM options
-set :rvm_ruby_version, '2.1.4@waverly'
 set :rvm_type, :user
+set :rvm_ruby_version, '2.1.4@waverly'
 set :rvm_roles, [:app, :web]
 
 # Rails options
@@ -28,10 +27,10 @@ set :conditionally_migrate, true
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :debug
+set :log_level, :info
 
 # Default value for :pty is false
-# set :pty, true
+set :pty, true
 
 # Default value for :linked_files is []
 # set :linked_files, fetch(:linked_files, []).push('config/database.yml')
@@ -47,6 +46,12 @@ set :conditionally_migrate, true
 
 namespace :deploy do
 
+  after :finishing do
+    on roles(:app)
+      execute :rake, 'rvmrc:trust'
+    end
+  end
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -55,5 +60,4 @@ namespace :deploy do
       # end
     end
   end
-
 end
