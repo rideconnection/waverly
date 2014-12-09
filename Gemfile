@@ -62,6 +62,7 @@ group :development do
   gem 'capistrano-rvm', '~> 0.1.2', require: false
   gem 'capistrano-rails', '~> 1.1', require: false
   gem 'capistrano-passenger', '~> 0.0.1', require: false
+  gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
 end
 
 group :test do
