@@ -54,7 +54,18 @@ end
 group :development do
   # Generate layout files for various front-end frameworks (i.e. Bootstrap)
   gem 'rails_layout'
+
+  # Deployment
+  gem 'capistrano', '~> 3.3'
+  gem 'capistrano-rvm', '~> 0.1.2', require: false
+  gem 'capistrano-rails', '~> 1.1', require: false
+  gem 'capistrano-passenger', '~> 0.0.1', require: false
 end
+
+
+group :development do
+end
+
 
 group :test do
   # Shoulda matchers and contexts for Test::Unit
