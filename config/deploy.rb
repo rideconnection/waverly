@@ -11,6 +11,9 @@ set :rvm_type, :user
 set :rvm_ruby_version, '2.1.4@waverly'
 set :rvm_roles, [:app, :web]
 
+# Postgres options
+set :pg_user, "waverly"
+
 # Rails options
 set :conditionally_migrate, true
 
@@ -27,13 +30,13 @@ set :conditionally_migrate, true
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-set :log_level, :info
+set :log_level, :debug
 
 # Default value for :pty is false
 set :pty, true
 
 # Default value for :linked_files is []
-# set :linked_files, fetch(:linked_files, []).push('config/database.yml')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
@@ -42,15 +45,11 @@ set :pty, true
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 20
 
 namespace :deploy do
 
-  after :finishing do
-    on roles(:app)
-      execute :rake, 'rvmrc:trust'
-    end
-  end
+  after :updated, 'rvmrc:trust'
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
