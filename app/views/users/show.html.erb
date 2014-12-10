@@ -20,4 +20,9 @@
     <strong>Last login:</strong>
     <%= @user.last_sign_in_at.try(:to_s, :long) %>
   </p>
+
+  <p>
+    <%= link_to "Edit User", edit_user_path(@user), class: "btn btn-primary btn-lg", role: "button" %>
+    <%= link_to "User List", users_path, class: "btn btn-lg" %>
+  </p>
 <% end %>

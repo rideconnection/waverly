@@ -20,7 +20,21 @@ class UsersController < ApplicationController
   end
     
   def update
-    flash[:notice] = 'User was successfully updated.' if @user.update_attributes(user_params)
+    if params[:user][:password].blank?
+      params[:user].delete("password")
+      params[:user].delete("password_confirmation")
+      need_relogin = false
+    else
+      need_relogin = true
+    end
+    
+    if @user.update_attributes(user_params)
+      flash[:notice] = 'User was successfully updated.' 
+
+      # Devise logs users out on password change
+      sign_in(@user, :bypass => true) if need_relogin
+    end
+
     respond_with @user
   end
   
