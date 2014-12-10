@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable and :omniauthable
-  devise :database_authenticatable, :registerable, :timeoutable,
-         :recoverable, :rememberable, :trackable, :validatable
+  # :registerable, :confirmable, :lockable and :omniauthable
+  devise :database_authenticatable, :timeoutable, :recoverable, :rememberable, :trackable, :validatable
          
   has_many :read_client_authorizations, class_name: 'ClientAuthorization', foreign_key: :reader_id, inverse_of: :reader, dependent: :nullify
   
