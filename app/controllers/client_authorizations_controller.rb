@@ -7,12 +7,14 @@ class ClientAuthorizationsController < ApplicationController
   def index
     case params[:filter].try(:to_sym)
     when :all
-      # no-op
+      @filter_state = nil
     when :read
       @client_authorizations = @client_authorizations.read
+      @filter_state = "read"
     else
       # default
       @client_authorizations = @client_authorizations.unread
+      @filter_state = "unread"
     end
     @client_authorizations = @client_authorizations.order(created_at: :desc).page(get_current_page)
   end

@@ -47,6 +47,6 @@
       <% end %>
     </tbody>
   </table>    
-  <p><%= page_entries_info @client_authorizations %></p>
+  <p><%= page_entries_info @client_authorizations, model: filter_state %></p>
   <%= will_paginate @client_authorizations, renderer: BootstrapPagination::Rails, params: params.slice(:filter) %>
 <% end %>
