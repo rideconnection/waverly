@@ -42,6 +42,7 @@ gem 'will_paginate-bootstrap', '~> 1.0.1'
 
 # API
 gem 'grape', '~> 0.9.0'
+gem 'grape-rabl', '~> 0.3.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -1,7 +1,9 @@
 module Waverly
   class API < Grape::API
     version 'v1', using: :header, vendor: 'waverly'
-    prefix :api
+    prefix :api    
+    format :xml
+    formatter :xml, Grape::Formatter::Rabl
     content_type :xml, 'application/xml'
     default_format :xml
     
@@ -22,10 +24,23 @@ module Waverly
           requires :key, type: String, desc: "Your authentication key"
         end
       end
-      post do
+      post '/', :rabl => "client_authorizations" do
         authenticate!(params[:clientAuthorization].delete(:key))
-        ca = ClientAuthorization.create! ClientAuthorizationRequest.new params[:clientAuthorization]
-        {status: "OK", reference: ca.prime}.to_xml(root: "result")
+        client_authorization = ClientAuthorization.create! ClientAuthorizationRequest.new params[:clientAuthorization]
+        @reference = OpenStruct.new({status: "OK", reference: client_authorization.prime})
+      end
+    end
+    
+    resource :client_trips do
+      desc "Retrieves a list of client trips based on a start date"
+      params do
+        requires :key, type: String, desc: "Your authentication key"
+        requires :modifyDate, type: String, regexp: /^\d{4}-\d{2}-\d{2}$/
+      end
+      get '/', :rabl => "client_trips" do
+        authenticate!(params[:key])
+        modify_date = Date.parse(params[:modifyDate])
+        @uploaded_trips = UploadedTrip.where("created_at >= ?", modify_date)
       end
     end
   end
