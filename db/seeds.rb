@@ -11,7 +11,7 @@ end
 
 private_key = "xxxxxxxxxxxxxx"
 unless Consumer.exists?(private_key: "xxxxxxxxxxxxxx")
-  User.create! name: "Multnomah County",
+  Consumer.create! name: "Multnomah County",
     private_key: private_key
   puts "-- Created initial consumer: Multnomah County"
 end
