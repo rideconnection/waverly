@@ -24,13 +24,5 @@ module Waverly
       g.assets false
       g.view_specs false
     end
-    
-    # For Bootstrap
-    config.assets.precompile.push(Proc.new do |path|
-      File.extname(path).in? [
-        '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
-        '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
-      ]
-    end)
   end
 end
