@@ -8,3 +8,10 @@ unless User.exists?(email: admin_email)
     administrator: true
   puts "-- Created initial user: #{admin_email}\n   password: '#{user_password}'"
 end
+
+private_key = "xxxxxxxxxxxxxx"
+unless Consumer.exists?(private_key: "xxxxxxxxxxxxxx")
+  User.create! name: "Multnomah County",
+    private_key: private_key
+  puts "-- Created initial consumer: Multnomah County"
+end
