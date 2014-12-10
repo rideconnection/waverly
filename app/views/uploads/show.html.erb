@@ -1,34 +1,47 @@
+<% content_for :head do %>
+  <style>
+    th {text-align: center;}
+    th, td {padding: 12px !important;}
+  </style>
+<% end %>
 <% cache(@upload) do %>
   <h1>Trips Uploaded <%= @upload.uploaded_at.to_s(:long) %></h1>
   <div class="table-responsive">
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover table-bordered">
       <thead>
-        <th>Prime Number</th>
-        <th>Client Last</th>
-        <th>Client First</th>
-        <th>Client MI</th>
-        <th>Trip ID</th>
-        <th>Service Date</th>
-        <th>Pickup Time</th>
-        <th>Appt Time</th>
-        <th>Will Call</th>
-        <th>Pickup Name</th>
-        <th>Pickup Address</th>
-        <th>Pickup City</th>
-        <th>Pickup State</th>
-        <th>Pickup Zip</th>
-        <th>Dropoff Name</th>
-        <th>Dropoff Address</th>
-        <th>Dropoff City</th>
-        <th>Dropoff State</th>
-        <th>Dropoff Zip</th>
-        <th>Reason</th>
-        <th>Status</th>
-        <th>Mode</th>
-        <th>Mileage</th>
+        <tr>
+          <th rowspan="2">Prime Number</th>
+          <th colspan="3">Client Name</th>
+          <th rowspan="2">Trip ID</th>
+          <th rowspan="2">Service Date</th>
+          <th rowspan="2">Pickup Time</th>
+          <th rowspan="2">Appt Time</th>
+          <th rowspan="2">Will Call</th>
+          <th colspan="5">Pickup</th>
+          <th colspan="5">Dropoff</th>
+          <th rowspan="2">Reason</th>
+          <th rowspan="2">Status</th>
+          <th rowspan="2">Mode</th>
+          <th rowspan="2">Mileage</th>
+        </tr>
+        <tr>
+          <th>Last</th>
+          <th>First</th>
+          <th>MI</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zip</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zip</th>
+        </tr>
       </thead>
       <tbody>
-        <% @upload.uploaded_trips.each do |trip| %>
+        <% @upload.uploaded_trips.order(:client_last, :client_first).each do |trip| %>
           <% cache(trip) do %>
             <tr>
               <td><%= trip.prime_number %></td>
@@ -36,7 +49,7 @@
               <td><%= trip.client_first %></td>
               <td><%= trip.client_mi %></td>
               <td><%= trip.trip_id %></td>
-              <td><%= trip.service_date %></td>
+              <td><%= trip.service_date.try(:to_s, :short) %></td>
               <td><%= trip.pickup_time %></td>
               <td><%= trip.appt_time %></td>
               <td><%= trip.will_call %></td>

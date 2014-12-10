@@ -16,4 +16,10 @@ module ApplicationHelper
     current_user_updated_at = current_user.updated_at.try(:utc).try(:to_s, :number)
     "users/#{user.id}-#{user_updated_at}-#{current_user_updated_at}"
   end
+
+  def cache_key_for_client_authorizations
+    count          = ClientAuthorization.count
+    max_updated_at = ClientAuthorization.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "client_authorizations/all-#{count}-#{max_updated_at}"
+  end
 end

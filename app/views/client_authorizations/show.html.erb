@@ -1,0 +1,89 @@
+<% cache(@client_authorization) do %>
+  <h1><%= @client_authorization.prime %> : <%= @client_authorization.full_name %></h1>
+
+  <p>
+    <strong>Prime:</strong>
+    <%= @client_authorization.prime %>
+  </p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @client_authorization.full_name %>
+  </p>
+
+  <p>
+    <strong>DOB:</strong>
+    <%= @client_authorization.dob.try(:to_s, :short) %>
+  </p>
+
+  <p>
+    <strong>Case manager:</strong>
+    <%= @client_authorization.case_manager %>
+  </p>
+
+  <p>
+    <strong>Case manager phone:</strong>
+    <%= @client_authorization.case_manager_phone %>
+  </p>
+
+  <p>
+    <strong>Branch:</strong>
+    <%= @client_authorization.branch %>
+  </p>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <strong>Current Authorization</strong>
+    </div>
+    <div class="panel-body">
+      <p>
+        <strong>Authorized:</strong>
+        <%= @client_authorization.current_authorized %>
+      </p>
+
+      <p>
+        <strong>Date begins:</strong>
+        <%= @client_authorization.current_date_begins.try(:to_s, :short) %>
+      </p>
+    
+      <p>
+        <strong>Date ends:</strong>
+        <%= @client_authorization.current_date_ends.try(:to_s, :short) %>
+      </p>
+
+      <p>
+        <strong>Enter date:</strong>
+        <%= @client_authorization.current_enter_date.try(:to_s, :short) %>
+      </p>
+
+      <p>
+        <strong>Action:</strong>
+        <%= @client_authorization.current_action %>
+      </p>
+    </div>
+  </div>
+  
+  <p>
+    <strong>Uploaded:</strong>
+    <%= @client_authorization.created_at.try(:to_s, :long) %>
+  </p>
+
+  <p>
+    <strong>Read:</strong>
+    <%= @client_authorization.read_at.try(:to_s, :long) %>
+  </p>
+
+  <p>
+    <strong>Read by:</strong>
+    <%= @client_authorization.reader.try(:name) %>
+  </p>
+
+  <p>
+    <% if @client_authorization.read? %>
+      <%= link_to "Mark as Unread", mark_as_read_client_authorization_path(@client_authorization, :read => 0), method: :post, class: "btn btn-primary btn-lg", role: "button" %>
+    <% else %>
+      <%= link_to "Mark as Read", mark_as_read_client_authorization_path(@client_authorization, :read => 1), method: :post, class: "btn btn-primary btn-lg", role: "button" %>
+    <% end %>
+    <%= link_to "Client Authorization List", client_authorizations_path, class: "btn btn-lg" %>
+  </p>
+<% end %>
