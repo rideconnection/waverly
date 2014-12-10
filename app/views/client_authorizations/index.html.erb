@@ -1,7 +1,7 @@
 <% cache(cache_key_for_client_authorizations) do %>
   <h1>Client Authorizations</h1>
 
-  <%= bootstrap_form_tag url: '/client_authorizations', method: :get, layout: :inline do |f| %>
+  <%= bootstrap_form_tag url: client_authorizations_path, method: :get, layout: :inline do |f| %>
     <%= f.select :filter, options_for_select({"Only Unread" => "unread", "Only Read" => "read", "Show All" => "all"}, params[:filter]), { label: "Filter:&nbsp".html_safe }, { name: :filter, onchange: "this.form.submit();" } %>
   <% end %>
   
