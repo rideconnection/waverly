@@ -55,6 +55,7 @@ Rails.application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "https://ridestage.panopticdev.com/ridepilot"
+  config.action_controller.relative_url_root = '/waverly'
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
