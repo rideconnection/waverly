@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <% @users.each do |user| %>
-        <% cache(user, current_user) do %>
+        <% cache(cache_key_for_user(user, current_user)) do %>
           <tr>
             <td><%= user.name %></td>
             <td><%= user.email %></td>
