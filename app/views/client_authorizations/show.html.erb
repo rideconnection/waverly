@@ -13,7 +13,7 @@
 
   <p>
     <strong>DOB:</strong>
-    <%= @client_authorization.dob.try(:to_s, :short) %>
+    <%= @client_authorization.dob.try(:to_s, :db) %>
   </p>
 
   <p>
@@ -43,17 +43,17 @@
 
       <p>
         <strong>Date begins:</strong>
-        <%= @client_authorization.current_date_begins.try(:to_s, :short) %>
+        <%= @client_authorization.current_date_begins.try(:to_s, :long) %>
       </p>
     
       <p>
         <strong>Date ends:</strong>
-        <%= @client_authorization.current_date_ends.try(:to_s, :short) %>
+        <%= @client_authorization.current_date_ends.try(:to_s, :long) %>
       </p>
 
       <p>
         <strong>Enter date:</strong>
-        <%= @client_authorization.current_enter_date.try(:to_s, :short) %>
+        <%= @client_authorization.current_enter_date.try(:to_s, :long) %>
       </p>
 
       <p>

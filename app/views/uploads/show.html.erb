@@ -49,9 +49,9 @@
               <td><%= trip.client_first %></td>
               <td><%= trip.client_mi %></td>
               <td><%= trip.trip_id %></td>
-              <td><%= trip.service_date.try(:to_s, :short) %></td>
-              <td><%= trip.pickup_time %></td>
-              <td><%= trip.appt_time %></td>
+              <td><%= trip.service_date.try(:to_s, :long) %></td>
+              <td><%= trip.pickup_time.try(:to_s, :time) %></td>
+              <td><%= trip.appt_time.try(:to_s, :time) %></td>
               <td><%= trip.will_call %></td>
               <td><%= trip.pickup_name %></td>
               <td><%= trip.pickup_address %></td>
