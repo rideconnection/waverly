@@ -1,4 +1,4 @@
-<% cache(cache_key_for_uploads) do %>
+<% cache(cache_key_for_uploads(params.slice(:page))) do %>
   <h1>Uploaded Trip Files</h1>
 
   <p><%= link_to "New Upload", new_upload_path, class: "btn btn-primary btn-lg", role: "button" %></p>

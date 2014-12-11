@@ -1,4 +1,4 @@
-<% cache(cache_key_for_client_authorizations) do %>
+<% cache(cache_key_for_client_authorizations(params.slice(:filter, :page))) do %>
   <h1>Client Authorizations</h1>
 
   <%= bootstrap_form_tag url: client_authorizations_path, method: :get, layout: :inline do |f| %>

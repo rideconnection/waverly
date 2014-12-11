@@ -3,6 +3,8 @@ require 'csv'
 class Upload < ActiveRecord::Base
   has_many :uploaded_trips, autosave: true
   
+  self.per_page = 10
+  
   validate :has_uploaded_trips?
 
   before_create :set_uploaded_at

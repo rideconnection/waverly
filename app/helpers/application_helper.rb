@@ -1,14 +1,10 @@
 module ApplicationHelper
-  def cache_key_for_uploads
-    count          = Upload.count
-    max_updated_at = Upload.maximum(:updated_at).try(:utc).try(:to_s, :number)
-    "uploads/all-#{count}-#{max_updated_at}"
+  def cache_key_for_uploads(params = {})
+    "uploads/all-#{build_cache_key(Upload, params)}"
   end
 
-  def cache_key_for_users
-    count          = User.count
-    max_updated_at = User.maximum(:updated_at).try(:utc).try(:to_s, :number)
-    "users/all-#{count}-#{max_updated_at}"
+  def cache_key_for_users(params = {})
+    "users/all-#{build_cache_key(User, params)}"
   end
 
   def cache_key_for_user(user, current_user)
@@ -17,9 +13,16 @@ module ApplicationHelper
     "users/#{user.id}-#{user_updated_at}-#{current_user_updated_at}"
   end
 
-  def cache_key_for_client_authorizations
-    count          = ClientAuthorization.count
-    max_updated_at = ClientAuthorization.maximum(:updated_at).try(:utc).try(:to_s, :number)
-    "client_authorizations/all-#{count}-#{max_updated_at}"
+  def cache_key_for_client_authorizations(params = {})
+    "client_authorizations/all-#{build_cache_key(ClientAuthorization, params)}"
+  end
+  
+  private
+  
+  def build_cache_key(klass, params)
+    count          = klass.count
+    max_updated_at = klass.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    cache_keys = [count, max_updated_at] + params.stringify_keys.sort.flatten
+    cache_keys.join("-")
   end
 end
