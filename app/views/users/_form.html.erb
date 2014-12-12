@@ -2,4 +2,6 @@
 
 <%= f.text_field :name %>
 <%= f.text_field :email %>
-<%= f.check_box :administrator %>
+<% if current_user.administrator? %>
+  <%= f.check_box :administrator %>
+<% end %>
