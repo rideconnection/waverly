@@ -12,7 +12,9 @@ class Upload < ActiveRecord::Base
   def built_uploaded_trips_from_file(file)
     begin
       CSV.foreach(file.path, headers: true) do |row|
-        uploaded_trips.build row.to_hash
+        # Strip out non-printing characters from the header row
+        row_hash = Hash[row.to_hash.map {|k,v| [k.gsub(/[^0-9A-Za-z_]/, '') ,v]}]
+        uploaded_trips.build row_hash
       end
     rescue => e
       uploaded_trips(true)
