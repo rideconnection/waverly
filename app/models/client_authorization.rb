@@ -5,6 +5,11 @@ class ClientAuthorization < ActiveRecord::Base
   scope :unread, -> { where read_at: nil }
   
   self.per_page = 10
+  
+  validates :dob,                 :timeliness => {:type => :date}
+  validates :current_date_begins, :timeliness => {:type => :date}
+  validates :current_date_ends,   :timeliness => {:type => :date}
+  validates :current_enter_date,  :timeliness => {:type => :date}
 
   def full_name
     [first_name, last_name].compact.join(" ")

@@ -1,7 +1,7 @@
 require 'csv'
 
 class Upload < ActiveRecord::Base
-  has_many :uploaded_trips, autosave: true
+  has_many :uploaded_trips, autosave: true, dependent: destroy
   
   self.per_page = 10
   
