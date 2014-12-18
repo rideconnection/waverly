@@ -1,4 +1,4 @@
-collection @uploaded_trips, root: "list", object_root: "trip"
+collection @uploaded_trips, root: "trips", object_root: false
 node do |trip|
   {
     client: {
