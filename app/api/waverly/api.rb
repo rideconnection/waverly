@@ -24,10 +24,17 @@ module Waverly
           requires :key, type: String, desc: "Your authentication key"
         end
       end
-      post '/', :rabl => "client_authorizations" do
+      post '/' do
         authenticate!(params[:clientAuthorization].delete(:key))
-        client_authorization = ClientAuthorization.create! ClientAuthorizationRequest.new params[:clientAuthorization]
-        @reference = OpenStruct.new({status: "OK", reference: client_authorization.prime})
+        client_authorization = ClientAuthorization.new ClientAuthorizationRequest.new params[:clientAuthorization]
+        if client_authorization.save
+          render rabl: "client_authorization", locals: { 
+            result: OpenStruct.new({status: "OK", reference: client_authorization.prime}) 
+          }
+        else
+          status 422
+          client_authorization.errors
+        end
       end
     end
     
