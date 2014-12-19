@@ -1,7 +1,7 @@
 require 'csv'
 
 class Upload < ActiveRecord::Base
-  has_many :uploaded_trips, autosave: true, dependent: destroy
+  has_many :uploaded_trips, autosave: true, dependent: :destroy
   
   self.per_page = 10
   
@@ -11,10 +11,8 @@ class Upload < ActiveRecord::Base
   
   def built_uploaded_trips_from_file(file)
     begin
-      CSV.foreach(file.path, headers: true) do |row|
-        # Strip out non-printing characters from the header row
-        row_hash = Hash[row.to_hash.map {|k,v| [k.gsub(/[^0-9A-Za-z_]/, '') ,v]}]
-        uploaded_trips.build row_hash
+      CSV.foreach(file.path, headers: true, encoding: "BOM|UTF-8") do |row|
+        uploaded_trips.build row.to_hash
       end
     rescue => e
       uploaded_trips(true)
