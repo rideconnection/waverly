@@ -15,7 +15,7 @@ class UploadsController < ApplicationController
 
   def create
     @upload = Upload.new
-    uploaded_file = params[:upload][:file]
+    uploaded_file = params[:upload].try(:fetch,:file)
     if uploaded_file.present? && uploaded_file.size > 0
       @upload.built_uploaded_trips_from_file(uploaded_file)
     else
