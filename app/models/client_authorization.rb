@@ -18,4 +18,14 @@ class ClientAuthorization < ActiveRecord::Base
   def read?
     read_at.present?
   end
+
+  def action_description
+    if current_action == 'C'
+      'Eligibility Change'
+    elsif current_action == 'N'
+      'New Customer'
+    else
+      "Action Code \"#{current_action}\""
+    end
+  end
 end

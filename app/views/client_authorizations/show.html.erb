@@ -2,7 +2,7 @@
   <h1><%= @client_authorization.prime %> : <%= @client_authorization.full_name %></h1>
 
   <p>
-    <strong>Prime:</strong>
+    <strong>Prime Number:</strong>
     <%= @client_authorization.prime %>
   </p>
 
@@ -13,7 +13,7 @@
 
   <p>
     <strong>DOB:</strong>
-    <%= @client_authorization.dob.try(:to_s, :db) %>
+    <%= @client_authorization.dob.try(:to_s, :long) %>
   </p>
 
   <p>
@@ -58,13 +58,13 @@
 
       <p>
         <strong>Action:</strong>
-        <%= @client_authorization.current_action %>
+        <%= @client_authorization.action_description %>
       </p>
     </div>
   </div>
   
   <p>
-    <strong>Uploaded:</strong>
+    <strong>Received:</strong>
     <%= @client_authorization.created_at.try(:to_s, :long) %>
   </p>
 
