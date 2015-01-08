@@ -21,7 +21,7 @@ class ClientAuthorization < ActiveRecord::Base
 
   def action_description
     if current_action == 'C'
-      'Eligibility Change'
+      'Eligibility or Case Manager Change'
     elsif current_action == 'N'
       'New Customer'
     else
