@@ -4,7 +4,7 @@ class ClientAuthorization < ActiveRecord::Base
   scope :read, -> { where.not read_at: nil }
   scope :unread, -> { where read_at: nil }
   
-  self.per_page = 10
+  self.per_page = 100
   
   validates :dob,                 :timeliness => {:type => :date}
   validates :current_date_begins, :timeliness => {:type => :date}
