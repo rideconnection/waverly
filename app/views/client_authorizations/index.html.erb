@@ -3,7 +3,7 @@
 
   <%= bootstrap_form_tag url: client_authorizations_path, method: :get, layout: :inline do |f| %>
     <%= f.select :filter, options_for_select({"Only Unread" => "unread", "Only Read" => "read", "Show All" => "all"}, params[:filter]), { label: "Filter:&nbsp".html_safe }, { name: :filter, onchange: "this.form.submit();" } %>
-    <%= f.text_field :name_filter, value: params[:name_filter], label: "Name:&nbsp".html_safe, onchange: "this.form.submit();" %>
+    <%= f.text_field :name_filter, value: params[:name_filter], label: "Name/Prime:&nbsp".html_safe, onchange: "this.form.submit();" %>
   <% end %>
   
   <table class="table table-striped table-hover">

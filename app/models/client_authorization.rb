@@ -3,7 +3,7 @@ class ClientAuthorization < ActiveRecord::Base
   
   scope :read, -> { where.not read_at: nil }
   scope :unread, -> { where read_at: nil }
-  scope :by_name, ->(name) { where "last_name ILIKE '%' || ? || '%' OR first_name ILIKE '%' || ? || '%'", name, name }
+  scope :by_name, ->(name) { where "prime = ? OR last_name ILIKE '%' || ? || '%' OR first_name ILIKE '%' || ? || '%'", name, name, name }
   
   self.per_page = 100
   
