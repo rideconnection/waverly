@@ -12,7 +12,9 @@ class Upload < ActiveRecord::Base
   def built_uploaded_trips_from_file(file)
     begin
       CSV.foreach(file.path, headers: true, encoding: "BOM|UTF-8") do |row|
-        uploaded_trips.build row.to_hash
+        this_row = row.to_hash
+        UploadedTrip.where(trip_id: this_row["trip_id"]).update_all is_current: false
+        uploaded_trips.build this_row
       end
     rescue => e
       uploaded_trips(true)
