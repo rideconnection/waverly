@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209222020) do
+ActiveRecord::Schema.define(version: 20150408161956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20141209222020) do
     t.float    "mileage"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_current",      default: true, null: false
   end
 
   add_index "uploaded_trips", ["upload_id"], name: "index_uploaded_trips_on_upload_id", using: :btree
