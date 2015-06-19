@@ -8,7 +8,7 @@ set :deploy_to, '/home/deployer/rails/waverly'
 
 # RVM options
 set :rvm_type, :user
-set :rvm_ruby_version, '2.1.4@waverly'
+set :rvm_ruby_version, '2.1.5@waverly'
 set :rvm_roles, [:app, :web]
 
 # Rails options
