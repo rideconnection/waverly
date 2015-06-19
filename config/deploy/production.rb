@@ -8,6 +8,6 @@ set :default_env, { "RAILS_RELATIVE_URL_ROOT" => "/waverly" }
 set :rails_env, 'production'
 set :assets_roles, [:web, :app]
 set :migration_role, [:db]
-set :conditionally_migrate, false
+set :conditionally_migrate, true
 
 server 'apps.rideconnection.org', roles: [:app, :web, :db], user: 'deploy'
