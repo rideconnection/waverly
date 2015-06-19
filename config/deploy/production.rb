@@ -1,4 +1,4 @@
-set :branch, 'stable'
+set :branch, 'master'
 set :rvm_ruby_version, '2.1.5@waverly'
 set :passenger_rvm_ruby_version, '2.2.1@passenger'
 set :deploy_to, '/home/deploy/rails/waverly'

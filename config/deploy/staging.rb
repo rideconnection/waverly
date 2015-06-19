@@ -1,3 +1,4 @@
+# TODO update once we decide what to do with staging
 set :deploy_to, "/home/deployer/rails/waverly"
 set :branch, "master"
 set :rails_env, "staging"
