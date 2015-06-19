@@ -46,4 +46,5 @@ set :keep_releases, 20
 
 namespace :deploy do
   after :migrate, :seed
+  after :publishing, :restart
 end
