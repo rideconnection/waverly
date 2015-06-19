@@ -5,6 +5,7 @@ class ClientAuthorizationsController < ApplicationController
   respond_to :html
 
   def index
+    name_filter = params[:name_filter]
     case params[:filter].try(:to_sym)
     when :all
       @filter_state = nil
@@ -16,6 +17,7 @@ class ClientAuthorizationsController < ApplicationController
       @client_authorizations = @client_authorizations.unread
       @filter_state = "unread"
     end
+    @client_authorizations = @client_authorizations.by_name(name_filter) if name_filter.present?
     @client_authorizations = @client_authorizations.order(created_at: :desc).page(get_current_page)
   end
   

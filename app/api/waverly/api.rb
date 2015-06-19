@@ -47,7 +47,7 @@ module Waverly
       get '/', :rabl => "client_trips" do
         authenticate!(params[:key])
         modify_date = Date.parse(params[:modifyDate])
-        @uploaded_trips = UploadedTrip.where("created_at >= ?", modify_date)
+        @uploaded_trips = UploadedTrip.current_versions.where("created_at >= ?", modify_date)
       end
     end
   end
