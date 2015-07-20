@@ -13,11 +13,21 @@ class Upload < ActiveRecord::Base
     begin
       CSV.foreach(file.path, headers: true, encoding: "BOM|UTF-8") do |row|
         this_row = row.to_hash
-        unless UploadedTrip.where(trip_id: this_row["trip_id"], version_ts: Time.zone.parse(this_row["version_ts"])).exists?
+        if this_row['service_date'] =~ /\d{1,2}\/\d{1,2}\/\d{4}/
+          this_row['service_date'] = Time.strptime(this_row['service_date'], "%m/%d/%Y")
+        else
+          this_row['service_date'] = Time.parse(this_row['service_date'])
+        end
+        if this_row['version_ts'] =~ /\d{1,2}\/\d{1,2}\/\d{4} \d{1,2}:\d{2}/
+          this_row['version_ts'] = Time.strptime(this_row['version_ts'], "%m/%d/%Y %H:%M")
+        else
+          this_row['version_ts'] = Time.parse(this_row['version_ts'])
+        end
+        unless UploadedTrip.where(trip_id: this_row["trip_id"], version_ts: this_row["version_ts"]).exists?
           UploadedTrip.where(trip_id: this_row["trip_id"]).update_all is_current: false
           uploaded_trips.build this_row
         end
-    end
+      end
     rescue => e
       uploaded_trips(true)
       errors.add :base, "Could not build uploaded trips from file: #{e.message}"
