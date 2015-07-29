@@ -13,12 +13,12 @@ class Upload < ActiveRecord::Base
     begin
       CSV.foreach(file.path, headers: true, encoding: "BOM|UTF-8") do |row|
         this_row = row.to_hash
-        if this_row['service_date'] =~ /\d{1,2}\/\d{1,2}\/\d{4}/
+        if this_row['service_date'] =~ /^\d{1,2}\/\d{1,2}\/\d{4}$/
           this_row['service_date'] = Time.strptime(this_row['service_date'], "%m/%d/%Y")
         else
           this_row['service_date'] = Time.parse(this_row['service_date'])
         end
-        if this_row['version_ts'] =~ /\d{1,2}\/\d{1,2}\/\d{4} \d{1,2}:\d{2}/
+        if this_row['version_ts'] =~ /^\d{1,2}\/\d{1,2}\/\d{4} \d{1,2}:\d{2}$/
           this_row['version_ts'] = Time.strptime(this_row['version_ts'], "%m/%d/%Y %H:%M")
         else
           this_row['version_ts'] = Time.parse(this_row['version_ts'])
