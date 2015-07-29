@@ -1,6 +1,6 @@
-set :branch, 'master'
+set :branch, 'stable'
 set :rvm_ruby_version, '2.1.5@waverly'
-set :passenger_rvm_ruby_version, '2.2.1@passenger'
+set :passenger_rvm_ruby_version, '2.2.2@passenger'
 set :deploy_to, '/home/deploy/rails/waverly'
 set :default_env, { "RAILS_RELATIVE_URL_ROOT" => "/waverly" }
 
